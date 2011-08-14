@@ -2,9 +2,13 @@ The CAdvancedArBehavior extension adds up some functionality to the default poss
 
 ## Changelog 
 
-Version 0.3 added 25. 05. 2011 by thyseus
+* Vesion 0.4 added 14.08.2011 by kirs
 
-added $ignoreRelations to ignore specified relations. The Behavior will take all found many2many relations by default. Specify exceptions in this array.
+Relations will be destroyed after model deletion, duplications of many2many relations won't be saved.
+
+* Version 0.3 added 25.05.2011 by thyseus
+
+added `$ignoreRelations` to ignore specified relations. The Behavior will take all found many2many relations by default. Specify exceptions in this array.
 fixes all the bugs and glitches found in the discussion
 
 # Installation 
@@ -18,7 +22,7 @@ To use this extension, just copy this file to your extensions/ directory, add `'
 
 # Possibilities: 
 
-## Better support of MANY_TO_MANY relations:
+### Better support of MANY_TO_MANY relations:
 
 When we have defined a MANY_MANY relation in our relations() function, we are now able to add up instances of the foreign Model on the fly while saving our Model to the Database. Let´s assume the following Relation:
 
@@ -50,3 +54,8 @@ We can also pass a single object or an single integer:
     $category->posts = Post::model()->findByPk(12);
     $category->posts = 12;
     $category->save();
+
+# Credits
+
+Originaly written by [thesus][http://www.yiiframework.com/user/1134/].
+In August 2011 extension was imploved by Kirs for [Navigator-edu][http://navigator-edu.ru/].
