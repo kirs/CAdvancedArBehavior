@@ -1,6 +1,6 @@
 The CAdvancedArBehavior extension adds up some functionality to the default possibilites of yii´s ActiveRecord implementation. At the moment it is able to automatically save MANY_MANY relation objects when save()-ing an Object.
 
-Changelog 
+## Changelog 
 
 Version 0.3 added 25. 05. 2011 by thyseus
 
@@ -11,16 +11,14 @@ fixes all the bugs and glitches found in the discussion
 
 To use this extension, just copy this file to your extensions/ directory, add `'import' => 'application.extensions.CAdvancedArBehavior', [...]` to your `config/main.php` and add this behavior to each model you would like to inherit the new possibilities.
 
-# Usage
+    public function behaviors(){
+      return array( 'CAdvancedArBehavior' => array(
+        'class' => 'application.extensions.CAdvancedArBehavior'));
+    }
 
-public function behaviors(){
-  return array( 'CAdvancedArBehavior' => array(
-    'class' => 'application.extensions.CAdvancedArBehavior'));
-}
+# Possibilities: 
 
-# Possibilities so far: 
-
-Better support of MANY_TO_MANY relations: 
+## Better support of MANY_TO_MANY relations:
 
 When we have defined a MANY_MANY relation in our relations() function, we are now able to add up instances of the foreign Model on the fly while saving our Model to the Database. Let´s assume the following Relation:
 
@@ -44,7 +42,7 @@ We can further limit the Objects given to the attribute, and can also go the oth
     
 We can pass Object instances like in the first example, or a list of integers that representates the Primary key of the Foreign Table, so that the Posts with the id 5, 6, 7 and 10 get´s added up to our new Category.
 
-5 Queries will be performed here, one for the Category-Model and four for the N:M-Table tbl_post_category. Note that this behavior could be tuned further in the future, so only one query get´s executed for the MANY_MANY Table.
+Queries will be performed here, one for the Category-Model and four for the N:M-Table tbl_post_category. Note that this behavior could be tuned further in the future, so only one query get´s executed for the MANY_MANY Table.
 
 We can also pass a single object or an single integer:
 
