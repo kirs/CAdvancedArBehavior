@@ -2,7 +2,7 @@ The CAdvancedArBehavior extension adds up some functionality to the default poss
 
 ## Changelog 
 
-* Vesion 0.4 added 14.08.2011 by kirs
+* Version 0.4 added 14.08.2011 by kirs
 
 Relations will be destroyed after model deletion, duplications of many2many relations won't be saved.
 
@@ -57,5 +57,5 @@ We can also pass a single object or an single integer:
 
 # Credits
 
-Originaly written by [thesus][http://www.yiiframework.com/user/1134/].
-In August 2011 extension was imploved by Kirs for [Navigator-edu][http://navigator-edu.ru/].
+Originaly written by [thesus](http://www.yiiframework.com/user/1134/).
+In August 2011 extension was imploved by Kirs for [Navigator-edu](http://navigator-edu.ru/).
