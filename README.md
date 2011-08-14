@@ -58,4 +58,5 @@ We can also pass a single object or an single integer:
 # Credits
 
 Originaly written by [thesus](http://www.yiiframework.com/user/1134/).
-In August 2011 extension was imploved by Kirs for [Navigator-edu](http://navigator-edu.ru/).
+
+In August 2011 extension was improved by Kirs for [Navigator-edu](http://navigator-edu.ru/).
