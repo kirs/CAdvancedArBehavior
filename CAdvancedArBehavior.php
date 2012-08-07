@@ -126,28 +126,28 @@ class CAdvancedArbehavior extends CActiveRecordBehavior
 	{
 		$relations = array();
 
-		foreach ($this->owner->relations() as $key => $relation) 
+		foreach ($this->owner->getMetaData()->relations as $key => $relation)
 		{
-			if ($relation[0] == CActiveRecord::MANY_MANY && 
+			if (get_class($relation) == CActiveRecord::MANY_MANY &&
 					!in_array($key, $this->ignoreRelations) &&
-					// $this->owner->hasRelated($key) && // нэпонятно, к чему это условие
+					$this->owner->hasRelated($key) &&
 					$this->owner->$key != -1)
 			{
 				$info = array();
 				$info['key'] = $key;
-				$info['foreignTable'] = $relation[1];
+				$info['foreignTable'] = $relation->className;
 
-					if (preg_match('/^(.+)\((.+)\s*,\s*(.+)\)$/s', $relation[2], $pocks)) 
+					if (preg_match('/^(.+)\((.+)\s*,\s*(.+)\)$/s', $relation->foreignKey, $pocks))
 					{
 						$info['m2mTable'] = $pocks[1];
 						$info['m2mThisField'] = $pocks[2];
 						$info['m2mForeignField'] = $pocks[3];
 					}
-					else 
+					else
 					{
-						$info['m2mTable'] = $relation[2];
+						$info['m2mTable'] = $relation->foreignKey;
 						$info['m2mThisField'] = $this->owner->tableSchema->PrimaryKey;
-						$info['m2mForeignField'] = CActiveRecord::model($relation[1])->tableSchema->primaryKey;
+						$info['m2mForeignField'] = CActiveRecord::model($relation->className)->tableSchema->primaryKey;
 					}
 				$relations[$key] = $info;
 			}
