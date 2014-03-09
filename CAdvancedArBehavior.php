@@ -189,7 +189,14 @@ class CAdvancedArbehavior extends CActiveRecordBehavior
 	 * they are synchronized */
 	protected function cleanRelation($relation)
 	{
-		$this->execute($this->makeManyManyDeleteCommand($relation));
+		try
+		{
+			$this->execute($this->makeManyManyDeleteCommand($relation));
+		}
+		catch (CDbException $ex) {
+			// ignore any errors on cleaning the relation - just log them
+			Yii::trace("caught exception while cleaning relation '{$relation['foreignTable']}.{$relation['key']}': ".$ex->getMessage(), 'system.db.ar.CActiveRecord');
+		}
 	}
 
 	// A wrapper function for execution of SQL queries
@@ -207,7 +214,7 @@ class CAdvancedArbehavior extends CActiveRecordBehavior
 	}
 
 	public function makeManyManyDeleteCommand($relation) {
-		return sprintf("delete ignore from %s where %s = '%s'",
+		return sprintf("delete from %s where %s = '%s'",
 			$relation['m2mTable'],
 			$relation['m2mThisField'],
 			$this->owner->{$this->owner->tableSchema->primaryKey}
